@@ -1,0 +1,61 @@
+/* تأثير الزجاج الشفاف */
+.custom-header {
+    background: rgba(15, 15, 15, 0.85); /* لون داكن شفاف */
+    backdrop-filter: blur(10px); /* تأثير الضبابية خلف الهيدر */
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* تخصيص الروابط */
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+/* تأثير الخط السفلي عند تمرير الماوس */
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    right: 15px;
+    background-color: #dc3545;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 70%;
+}
+
+/* تصميم الزر الدائري */
+.btn-rounded-pill {
+    border-radius: 50px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-rounded-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+/* تحسين شكل القائمة المنسدلة */
+.dropdown-menu {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.dropdown-item {
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
