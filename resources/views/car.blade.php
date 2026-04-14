@@ -6,7 +6,7 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row g-4">
-            @foreach($cars as $car)
+            @foreach($s as $car)
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card h-100 border-0 shadow-sm overflow-hidden car-card transition-all">
                         

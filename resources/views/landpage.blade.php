@@ -26,7 +26,7 @@
                     </div>
                     
                     <div class="card-footer bg-transparent border-0 pb-4 text-center">
-                        <a href="{{ route('listcar') }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
+                        <a href="{{ route('listcar',['type' => $item['type']]) }}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-bold">
                             عرض الموديلات <i class="bi bi-arrow-left ms-1"></i>
                         </a>
                     </div>
