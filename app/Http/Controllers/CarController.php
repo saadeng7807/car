@@ -34,7 +34,10 @@ class CarController extends Controller
     }
 
 
-
+public function Update(Request $request)
+{
+    
+}
 
 public function List_Car($type)
 {
