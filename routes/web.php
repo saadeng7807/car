@@ -22,3 +22,7 @@ Route::get('/dashboard',function(){
 route::get('/dashboard/brand',[DashboardController::class,'get_brand'])->name('dashboard.brand');
 
 route::get('/dashboard/cars',[DashboardController::class,'get_cars'])->name('dashboard.cars');
+
+Route::post('/save_brand',[DashboardController::class,'Save_Brand'])->name('save_brand');
+
+Route::post('/save_car',[DashboardController::class,'Save_Car'])->name('save_car');
