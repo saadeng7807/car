@@ -4,32 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use function Termwind\parse;
-
+use App\Models\Brand;
 class CarController extends Controller
 {
     public function Index()
     {
-        $carCategories = [
-        [
-            'name' => 'سيدان (Sedan)',
-            'description' => 'سيارات عائلية مريحة ومناسبة للمدينة.',
-            'icon' => 'bi-car-front',
-            'type'=>'sydan'
-        ],
-        [
-            'name' => 'دفع رباعي (SUV)',
-            'description' => 'سيارات قوية مخصصة للطرق الوعرة والمساحات الواسعة.',
-            'icon' => 'bi-truck',
-            'type'=>'SUV'   
-        ],
-        [
-            'name' => 'رياضية (Sports)',
-            'description' => 'سيارات ذات أداء عالٍ وتصميم انسيابي جذاب.',
-            'icon' => 'bi-speedometer',
-            'type'=>'sport'
-            
-        ]
-    ];
+        $carCategories = Brand::all();//  استرجاع جميع الفئات من قاعدة البيانات
         return view('landpage',compact('carCategories'));
     }
 

@@ -25,6 +25,7 @@
                   <option value="sydan">sydan</option>
                   <option value="SUV"> SUV </option>
                    <option value="sport"> sport </option>
+                     <option value="transport_large"> transport large </option>
                 </select>
             </div>
              <div class="mb-3">
@@ -34,13 +35,52 @@
                 <div class="invalid-feedbaCK text-danger"><span class="text-danger">{{ $message }}</span></div>
               @enderror
              </div>
+
+              <div class="mb-3">
+                <label class="form-label">ايقونة الفئة </label>
+                <input type="text" class="form-control" name="icons" >
+                @error('icons')
+                  <div class="invalid-feedbaCK text-danger"><span class="text-danger">{{ $message }}</span></div>
+                @enderror
+              </div>
                 <div class="row">
                   <div class="col text-center">
                       <button type="submit" class="btn btn-primary ">حفظ</button>
                   </div>
                 </div>
           </form>
+
+         
         </div>
+         <div class="card" style="background-color: rgb(175, 119, 232)">
+              <div class="card-header">
+                <h3 class="alert alert-info text-center">الفئات المضافة</h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>الاسم</th>
+                        <th>نوع الفئة</th>
+                        <th>الوصف</th>
+                        <th>ايقونة الفئة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($brands as $brand)
+                      <tr>
+                        <td>{{ $brand->name }}</td>
+                        <td>{{ $brand->type }}</td>
+                        <td>{{ $brand->description }}</td>
+                        <td><i class="bi {{ $brand->icons }} display-5"></i></td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
       </div>
       </div>
     </div>

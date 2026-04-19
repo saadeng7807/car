@@ -10,7 +10,9 @@ class DashboardController extends Controller
 {
     public function get_brand()
     {
-          return view('dashboard.brand');
+           $brands = Brand::all();//  استرجاع جميع الفئات من قاعدة البيانات     
+           return view('dashboard.brand',compact('brands'));
+        
     }
 
 
@@ -29,13 +31,15 @@ class DashboardController extends Controller
         'name' => 'required',
         'type' => 'required',
         'description' => 'required',
+        'icons' => 'nullable',
        ];
 
 
        $message=[
             'name.required'=>'يرجى ادخال اسم العلامة التجارية',
             'type.required'=>'يرجى ادخال نوع العلامة التجارية',
-            'description.required'=>'يرجى ادخال وصف العلامة التجارية'
+            'description.required'=>'يرجى ادخال وصف العلامة التجارية',
+            'icons.nullable'=>'يرجى ادخال ايقونة العلامة التجارية',
 
 
        ];
@@ -48,6 +52,7 @@ class DashboardController extends Controller
         'name' => $request->name,
         'type' => $request->type,
         'description' => $request->description,
+        'icons' => $request->icons,
        ]);
 
          return back();
@@ -58,12 +63,14 @@ class DashboardController extends Controller
 
     public function Save_Car(Request $request)
     {
+       
         $rule=[
             'model_name' => 'required',
             'year' => 'required',
             'color' => 'required',
             'price' => 'required',
             'mileage' => 'required',
+          
         ];
 
         $message=[
@@ -72,7 +79,21 @@ class DashboardController extends Controller
             'color.required'=>'يرجى ادخال لون السيارة',
             'price.required'=>'يرجى ادخال سعر السيارة',
             'mileage.required'=>'يرجى ادخال عدد الكيلومترات المقطوعة',
+          
         ];
+
+        // step 1: 
+        $image_Name=null;
+
+        if($request->hasFile('image'))
+            {
+                $image=$request->file('image');
+                $image_Name=time().'_'. uniqid().'_'.$image->getClientOriginalName();
+
+                $image->move(public_path('images'),$image_Name);
+
+               
+            }
 
         $request->validate($rule, $message);
 
@@ -83,6 +104,7 @@ class DashboardController extends Controller
                   'color' => $request->color,
                   'price' => $request->price,
                   'mileage' => $request->mileage,
+                  'image' => $image_Name,
             ]);
 
             return back();

@@ -8,6 +8,6 @@ class Car extends Model
 {
      protected $fillable = [
 
-       'model_name', 'year', 'color', 'price', 'mileage'
+       'model_name', 'year', 'color', 'price', 'mileage','image'
      ];
 }

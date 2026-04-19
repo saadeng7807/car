@@ -17,7 +17,7 @@
                 <div class="card h-100 border-0 shadow-sm custom-card-hover transition-all">
                     <div class="card-body text-center p-4">
                         <div class="icon-wrapper mb-4 d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 80px; height: 80px;">
-                            <i class="bi {{ $item['icon'] }} display-5"></i>
+                            <i class="bi {{ $item['icons'] }} display-5"></i>
                         </div>
 
                         <h5 class="card-title fw-bold mb-3">{{ $item['name'] }}</h5>
