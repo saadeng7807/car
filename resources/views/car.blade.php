@@ -11,7 +11,7 @@
                     <div class="card h-100 border-0 shadow-sm overflow-hidden car-card transition-all">
                         
                         <div class="position-relative overflow-hidden">
-                            <img src="{{ $car['image'] }}" class="card-img-top car-img" alt="{{ $car['model'] }}">
+                            <img src="{{asset('images/'.$car['image']) }}" class="card-img-top car-img" alt="{{ $car['model'] }}">
                             <span class="position-absolute top-0 end-0 m-3 badge rounded-pill {{ $car['type'] == 'sport' ? 'bg-danger' : ($car['type'] == 'SUV' ? 'bg-primary' : 'bg-dark') }}">
                                 {{ strtoupper($car['type']) }}
                             </span>
@@ -19,15 +19,16 @@
 
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="text-muted small fw-bold text-uppercase">{{ $car['brand'] }}</span>
+                                <span class="text-muted small fw-bold text-uppercase">{{ $car['model_name'] }}</span>
                                 <h6 class="text-primary mb-0 fw-bold">{{ $car['price'] }}</h6>
                             </div>
-                            <h5 class="card-title fw-bold text-dark">{{ $car['model'] }}</h5>
-                            
+                            <h5 class="card-title fw-bold text-dark">{{ $car['model_name'] }}</h5>
+
                             <div class="d-flex gap-3 mt-3 text-muted small">
                                 <span><i class="bi bi-fuel-pump me-1"></i> بنزين</span>
                                 <span><i class="bi bi-gear me-1"></i> أوتوماتيك</span>
-                                <span><i class="bi bi-speedometer2 me-1"></i> 0 كم</span>
+                                <span><i class="bi bi-speedometer2 me-1"></i> {{ $car['mileage'] }} كم</span>
+                                 <span><i class="bi bi-speedometer2 me-1"></i><span>اللون</span> {{ $car['color'] }} </span>
                             </div>
                         </div>
 

@@ -18,8 +18,9 @@ class DashboardController extends Controller
 
     public function get_cars()
     {
-        
-          return view('dashboard.cars');
+         $cars = Car::all();
+
+          return view('dashboard.cars',compact('cars'));
     }
 
 
@@ -53,6 +54,7 @@ class DashboardController extends Controller
         'type' => $request->type,
         'description' => $request->description,
         'icons' => $request->icons,
+       
        ]);
 
          return back();
@@ -105,11 +107,82 @@ class DashboardController extends Controller
                   'price' => $request->price,
                   'mileage' => $request->mileage,
                   'image' => $image_Name,
+                  'type' => $request->type,
             ]);
 
             return back();
     }
 
+    public function Delete_brand($id)
+    {
+        $brand = Brand::find($id);  // البحث عن الفئة بالمعرف
+        $brand->delete();
+        return back();
+        
+    }
+
+      public function Delete_Car($id)
+      {
+        $car = Car::find($id);  // البحث عن السيارة بالمعرف
+        $car->delete();
+        return back();
+      }
 
 
+      public function Edit_Brand($id)
+      {
+        $brand = Brand::find($id); // serch for the brand by id
+        return view('dashboard.edit_brands', compact('brand'));
+      }
+
+
+
+      public function Edit_Cars($id)
+      {
+        $car=Car::find($id);
+        return view('dashboard.edit_cars',compact('car'));
+      }
+
+
+      public function Update_Car(Request $request, $id)
+      {
+
+     
+        $image_Name=null;
+
+        if($request->hasFile('image'))
+            {
+                $image=$request->file('image');
+                $image_Name=time().'_'. uniqid().'_'.$image->getClientOriginalName();
+                 
+                $image->move(public_path('images'),$image_Name);
+
+               
+            }
+
+
+        $car = Car::find($id);
+        $car->update([
+            'model_name' => $request->model_name,
+            'year' => $request->year,
+            'color' => $request->color,
+            'price' => $request->price,
+            'mileage' => $request->mileage,
+            'image' => $image_Name,
+            'type' => $request->type,
+        ]);
+        return redirect()->route('dashboard.cars');
+      }
+
+      public function Update_brands(Request $request, $id)
+      {
+        $brand = Brand::find($id);
+        $brand->update([
+            'name' => $request->name,
+            'type' => $request->type,
+            'description' => $request->description,
+            'icons' => $request->icons,
+        ]);
+        return redirect()->route('dashboard.brand');
+      }
 }
