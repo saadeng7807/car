@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Brand;   
 use App\Models\Car;
-
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function get_brand()
@@ -16,12 +16,19 @@ class DashboardController extends Controller
     }
 
 
-    public function get_cars()
-    {
-         $cars = Car::all();
+   public function get_cars()
+{
+    $cars=Db::table('cars')
+    ->join('brands','cars.brand_id','=','brands.id')
+    ->select('cars.*','brands.name')
+    ->get();
 
-          return view('dashboard.cars',compact('cars'));
-    }
+ 
+    
+    $brands =DB::table('brands')->get(); // استرجاع جميع الفئات من قاعدة البيانات
+
+    return view('dashboard.cars', compact('cars', 'brands'));
+}
 
 
 
@@ -67,6 +74,7 @@ class DashboardController extends Controller
     {
        
         $rule=[
+            'brand_id' => 'required|exists:brands,id',
             'model_name' => 'required',
             'year' => 'required',
             'color' => 'required',
@@ -101,13 +109,15 @@ class DashboardController extends Controller
 
         // Save the car data to the database
             Car::create([
+                    'brand_id'=>$request->brand_id,
                   'model_name' => $request->model_name,
                   'year' => $request->year,
                   'color' => $request->color,
                   'price' => $request->price,
                   'mileage' => $request->mileage,
                   'image' => $image_Name,
-                  'type' => $request->type,
+                
+
             ]);
 
             return back();

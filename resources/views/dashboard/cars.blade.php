@@ -49,11 +49,10 @@
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">فئة السيارة</label>
-                            <select class="form-select @error('type') is-invalid @enderror" name="type">
-                                <option value="sedan" {{ old('type') == 'sedan' ? 'selected' : '' }}>Sedan (سيدان)</option>
-                                <option value="SUV" {{ old('type') == 'SUV' ? 'selected' : '' }}>SUV (عائلية)</option>
-                                <option value="sport" {{ old('type') == 'sport' ? 'selected' : '' }}>Sport (رياضية)</option>
-                                <option value="transport_large" {{ old('type') == 'transport_large' ? 'selected' : '' }}>نقل ثقيل</option>
+                            <select name="brand_id" id="" class="form-select">
+                                @foreach($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -88,7 +87,9 @@
                                     <th>السعر</th>
                                     <th>التفاصيل</th>
                                     <th>الصورة</th>
-                                    <th class="text-center">الإجراءات</th>
+                                     <th>الفئة</th>
+                                    <th class="text-center" colspan="2">الإجراءات</th>
+                                     
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,7 +98,7 @@
                                     <td class="fw-bold text-muted">{{ $ca->id }}</td>
                                     <td>
                                         <div class="fw-bold text-primary">{{ $ca->model_name }}</div>
-                                        <small class="badge bg-light text-dark border">{{ $ca->type }}</small>
+                                      
                                     </td>
                                     <td class="fw-bold text-success text-nowrap">{{ number_format($ca->price) }} ريال</td>
                                     <td>
@@ -110,6 +111,7 @@
                                              style="width: 80px; height: 50px; object-fit: cover;"
                                              alt="{{ $ca->model_name }}">
                                     </td>
+                                        <td>{{ $ca->name }}</td>
                                     <td class="text-center">
                                         <div class="btn-group shadow-sm" role="group">
                                             <a href="{{ route('edit_car', ['id' => $ca->id]) }}" class="btn btn-outline-primary btn-sm" title="تعديل">
@@ -122,6 +124,7 @@
                                             </a>
                                         </div>
                                     </td>
+                                 
                                 </tr>
                                 @endforeach
                             </tbody>
