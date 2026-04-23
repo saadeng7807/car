@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Facades\Cookie;
+@endphp
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -50,11 +53,11 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand fw-bold ms-3" href="#">إدارة <span class="text-primary">المنصة</span></a>
-                
+                <span class="text-white">  مرحباً {{ Auth::user()->name }}</span>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                 <strong class="text-white">{{  cookie::get('brand') }}</strong>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="d-flex me-auto my-2 my-lg-0">
                         <div class="input-group">
@@ -121,7 +124,9 @@
                     <a href="#" class="list-group-item list-group-item-action bg-transparent text-white-50 border-0 py-2">إضافة سيارة جديدة</a>
                     <a href="#" class="list-group-item list-group-item-action bg-transparent text-white-50 border-0 py-2">تقارير المبيعات</a>
                 </div>
-
+                <a href="{{ route('add_employee') }}" class="list-group-item list-group-item-action bg-dark text-white border-0">
+                    <i class="bi bi-person-fill-add ms-2"></i> تسجيل موظف جديد
+                </a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0">
                     <i class="bi bi-people ms-2"></i> العملاء
                 </a>
@@ -129,6 +134,15 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0 mt-auto">
                     <i class="bi bi-gear ms-2"></i> إعدادات النظام
                 </a>
+
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0 mt-auto" 
+                  onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">
+                <i class="bi bi-box-arrow-left ms-2"></i> تسجيل الخروج
+              </a>
+
+                <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
 

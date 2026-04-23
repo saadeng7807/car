@@ -6,7 +6,6 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
 
 
-
 Route::get('/',[CarController::class,'Index']);
 
 
@@ -20,9 +19,16 @@ Route::get('/dashboard',function(){
     return view('dashboard.index');
 })->name('dashboard');
 
+route::get('/add_employee',function(){
+    return view('auth.register');
+})->name('add_employee');
+
+  
+     route::get('/register',[DashboardController::class,'Store_employee'])->name('store_employee');
+
    route::get('/dashboard/brand',[DashboardController::class,'get_brand'])->name('dashboard.brand');
    route::get('/dashboard/cars',[DashboardController::class,'get_cars'])->name('dashboard.cars');
-
+Route::post('/saveemployee',[DashboardController::class,'Store_employee'])->name('store_employee');
 Route::post('/save_brand',[DashboardController::class,'Save_Brand'])->name('save_brand');
 
 Route::post('/save_car',[DashboardController::class,'Save_Car'])->name('save_car');

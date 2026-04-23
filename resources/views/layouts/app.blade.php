@@ -18,7 +18,7 @@
         <a class="navbar-brand d-flex align-items-center" href="#">
             <span class="fw-bold fs-3 tracking-tighter">VELOCITY<span class="text-danger">MOTORS</span></span>
         </a>
-
+        <span class="text-white">  {{ session('x') }}</span>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
             <span class="navbar-toggler-icon"></span>
         </button>

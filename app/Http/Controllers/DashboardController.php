@@ -6,10 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Brand;   
 use App\Models\Car;
 use Illuminate\Support\Facades\DB;
+use App\Actions\Fortify\CreateNewUser ;
+use Illuminate\support\Facades\Cookie;
 class DashboardController extends Controller
 {
     public function get_brand()
     {
+         Cookie::queue('brand', 'yaris', 60);
+          $x=session("x");
+
+         
            $brands = Brand::all();//  استرجاع جميع الفئات من قاعدة البيانات     
            return view('dashboard.brand',compact('brands'));
         
@@ -18,6 +24,7 @@ class DashboardController extends Controller
 
    public function get_cars()
 {
+   
     $cars=Db::table('cars')
     ->join('brands','cars.brand_id','=','brands.id')
     ->select('cars.*','brands.name')
@@ -69,7 +76,11 @@ class DashboardController extends Controller
 
     }
 
-
+    public function Store_employee(Request $request,CreateNewUser $createNewUser)
+    {
+       $createNewUser->create($request->all());
+       return back();
+    }
     public function Save_Car(Request $request)
     {
        

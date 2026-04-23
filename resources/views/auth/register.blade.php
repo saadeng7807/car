@@ -17,7 +17,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('store_employee') }}">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">اسم الموظف</label>
